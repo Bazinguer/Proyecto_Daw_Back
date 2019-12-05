@@ -1,7 +1,9 @@
-package es.quetepica.api.model.entitys;
+package es.quetepica.api.model.entities;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,11 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name="pet_profiles")
@@ -21,11 +19,11 @@ public class PetProfile {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name= "pet_profile_id")
 	private int id;	
 	
-	@ManyToOne
-	@JoinColumn(name="users_id")
-	@OnDelete(action = OnDeleteAction.CASCADE)
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="user_id")	
 	private User user;	
 	
 	private String nick;
@@ -34,20 +32,15 @@ public class PetProfile {
 	
 	private String raza;	
 	
-	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name= "img_profile")
+	private String imgProfile;
+	
+	private String description;	
+
+	@Column(name= "pet_borndate")
 	private LocalDate petBornDate;	
 	
-	private String description;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 	
-
 	public User getUser() {
 		return user;
 	}
@@ -95,7 +88,23 @@ public class PetProfile {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+		
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getImgProfile() {
+		return imgProfile;
+	}
+
+	public void setImgProfile(String imgProfile) {
+		this.imgProfile = imgProfile;
+	}
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
@@ -107,6 +116,7 @@ public class PetProfile {
 		 			", raza='" + this.getRaza() + '\'' +
 		 			", petBornDate='" + this.getPetBornDate() + '\'' +
 		 			", description=" + this.getDescription() +
+		 			", imgProfile=" + this.getImgProfile() +
 					'}';
 	}
 }

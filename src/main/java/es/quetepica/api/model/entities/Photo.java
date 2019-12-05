@@ -1,14 +1,16 @@
-package es.quetepica.api.model.entitys;
+package es.quetepica.api.model.entities;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "photos")
@@ -16,32 +18,35 @@ public class Photo {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name= "photo_id")
 	private int id;	
 	
-	
-	private Integer idPetProfile;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="pet_profile_id")	
+	private PetProfile petProfile;
 		
 	private String title;
 	
-	private String shortDesciprion;
+	private String shortDesciprion;	
 	
-	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="creation_date")
 	private LocalDateTime creationDate;
 
-	public Integer getId() {
+	
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	public Integer getIdPetProfile() {
-		return idPetProfile;
+	public PetProfile getPetProfile() {
+		return petProfile;
 	}
 
-	public void setIdPetProfile(Integer idPetProfile) {
-		this.idPetProfile = idPetProfile;
+	public void setPetProfile(PetProfile petProfile) {
+		this.petProfile = petProfile;
 	}
 
 	public String getTitle() {
@@ -73,7 +78,7 @@ public class Photo {
 		// TODO Auto-generated method stub
 		return "Photo{ " +
 		 			"id='" + this.getId() + '\'' +
-		 			", idPetProfile='" + this.getIdPetProfile() + '\'' +
+		 			", idPetProfile='" + this.getPetProfile() + '\'' +
 		 			", title='" + this.getTitle() + '\'' +
 		 			", shortDesciprion='" + this.getShortDesciprion() + '\'' +		 			
 		 			", creationDate='" + this.getCreationDate() + '\'' +

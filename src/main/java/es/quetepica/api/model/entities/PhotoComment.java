@@ -1,14 +1,16 @@
-package es.quetepica.api.model.entitys;
+package es.quetepica.api.model.entities;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "photo_comments")
@@ -16,39 +18,54 @@ public class PhotoComment {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="comment_id")
 	private int id;	
 	
-	private Integer idPhoto;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="photo_id")	
+	private Photo photo;
 	
-	private Integer idPetProfile;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="pet_profile_id")	
+	private PetProfile petProfile;
 	
+	@Column(name="text_comment")
 	private String comment;
-	
-	@Temporal(TemporalType.TIMESTAMP)
+		
+	@Column(name="creation_date")
 	private LocalDateTime creationDate;
 
-	public Integer getId() {
+
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	public Integer getIdPhoto() {
-		return idPhoto;
+	public Photo getPhoto() {
+		return photo;
 	}
 
-	public void setIdPhoto(Integer idPhoto) {
-		this.idPhoto = idPhoto;
+	public void setPhoto(Photo photo) {
+		this.photo = photo;
 	}
 
-	public Integer getIdPetProfile() {
-		return idPetProfile;
+	public PetProfile getPetProfile() {
+		return petProfile;
 	}
 
-	public void setIdPetProfile(Integer idPetProfile) {
-		this.idPetProfile = idPetProfile;
+	public void setPetProfile(PetProfile petProfile) {
+		this.petProfile = petProfile;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 	public String getComent() {
@@ -72,8 +89,8 @@ public class PhotoComment {
 		// TODO Auto-generated method stub
 		return "PhotoComent{ " +
 		 			"id='" + this.getId() + '\'' +
-		 			", idPhoto='" + this.getIdPhoto() + '\'' +
-		 			", idPetProfile='" + this.getIdPetProfile() + '\'' +
+		 			", idPhoto='" + this.getPhoto() + '\'' +
+		 			", idPetProfile='" + this.getPetProfile()+ '\'' +
 		 			", coment='" + this.getComent() + '\'' +		 		
 		 			", creationDate='" + this.getCreationDate() + '\'' +
 					'}';
