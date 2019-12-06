@@ -9,7 +9,7 @@ import es.quetepica.api.model.entities.User;
 import es.quetepica.api.wrappers.UserWrapper;
 
 @Repository
-public interface UserRepository extends JpaRepository<User,Long> {
+public interface UserRepository extends JpaRepository<User,Integer> {
 	Optional<User> findByEmailAndPassword(String email, String password);
 	Optional<UserWrapper> findByIdAndEmail(int id,String email);
 }

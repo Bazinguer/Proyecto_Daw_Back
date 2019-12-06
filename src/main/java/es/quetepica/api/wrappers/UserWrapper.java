@@ -1,35 +1,42 @@
 package es.quetepica.api.wrappers;
 
-import java.time.LocalDate;
+import java.util.Date;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import es.quetepica.api.model.entities.User;
 
-public class UserWrapper {
-	
-	private int id;
+public class UserWrapper {	
+
+	private Integer id;
 	
 	@NotNull
 	private String username;	
 
+	@NotNull	
 	private String email;
 	
 	@NotNull
 	private String password;	
 
-	private LocalDate bornDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)	
+	private Date bornDate;
 
 	public UserWrapper() {
 
 	}
 	
-	public UserWrapper(int id, String email) {	
+	public UserWrapper(Integer id, String email) {	
 		this.id = id;
 		this.email = email;		
 	}
 
-	public UserWrapper(String username, String email, String password, LocalDate bornDate) {	
+	public UserWrapper(String username, String email, String password, Date bornDate) {	
 		this.username = username;
 		this.email = email;
 		this.password = password;
@@ -47,11 +54,11 @@ public class UserWrapper {
 	}
 	
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -79,11 +86,11 @@ public class UserWrapper {
 		this.password = password;
 	}
 
-	public LocalDate getBornDate() {
+	public Date getBornDate() {
 		return bornDate;
 	}
 
-	public void setBornDate(LocalDate bornDate) {
+	public void setBornDate(Date bornDate) {
 		this.bornDate = bornDate;
 	}	
 	

@@ -1,7 +1,7 @@
 package es.quetepica.api.model.entities;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +17,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name= "user_id")
-	private int id;	
+	private Integer id;	
 	
 	private String username;		
 	
@@ -25,10 +25,10 @@ public class User {
 	private String email;
 	
 	private String password;	
-	
+
 	@Column(name= "born_date")
-	private LocalDate bornDate;
-	
+	private Date bornDate;
+		
 	@Column(name= "registration_date")
 	private LocalDateTime registrationDate;
 
@@ -36,7 +36,7 @@ public class User {
 		this.registrationDate = LocalDateTime.now();
 	}
 	
-	public User(String username, String email, String password, LocalDate bornDate) {
+	public User(String username, String email, String password, Date bornDate) {
 		this.username = username;
 		this.email = email;
 		this.password = password;
@@ -44,7 +44,13 @@ public class User {
 		this.registrationDate = LocalDateTime.now();
 	}
 
-
+/*	public User(UserWrapper userWrapper) {		
+		this.username = userWrapper.getUsername();
+		this.email = userWrapper.getEmail();
+		this.password = userWrapper.getPassword();
+		this.bornDate = userWrapper.getBornDate();		
+	}
+*/
 
 	public Integer getId() {
 		return id;
@@ -78,11 +84,11 @@ public class User {
 		this.password = password;
 	}
 
-	public LocalDate getBornDate() {
+	public Date getBornDate() {
 		return bornDate;
 	}
 
-	public void setBornDate(LocalDate bornDate) {
+	public void setBornDate(Date bornDate) {
 		this.bornDate = bornDate;
 	}
 

@@ -28,7 +28,7 @@ public class UserResource {
 		return this.userController.userLogin(email, password);
 	}
 	
-	@PostMapping
+	@PostMapping	
 	public UserWrapper createUser(UserWrapper userInputWrapper) {
 		return this.userController.createUser(userInputWrapper);		
 	}
