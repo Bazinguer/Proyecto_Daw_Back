@@ -35,7 +35,10 @@ public class PhotoComment {
 	@Column(name="creation_date")
 	private LocalDateTime creationDate;
 
-
+	public PhotoComment() {
+		this.creationDate = LocalDateTime.now();
+	}
+		
 	public int getId() {
 		return id;
 	}
@@ -68,14 +71,6 @@ public class PhotoComment {
 		this.comment = comment;
 	}
 
-	public String getComent() {
-		return comment;
-	}
-
-	public void setComent(String coment) {
-		this.comment = coment;
-	}
-
 	public LocalDateTime getCreationDate() {
 		return creationDate;
 	}
@@ -83,7 +78,7 @@ public class PhotoComment {
 	public void setCreationDate(LocalDateTime creationDate) {
 		this.creationDate = creationDate;
 	}
-	
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
@@ -91,7 +86,7 @@ public class PhotoComment {
 		 			"id='" + this.getId() + '\'' +
 		 			", idPhoto='" + this.getPhoto() + '\'' +
 		 			", idPetProfile='" + this.getPetProfile()+ '\'' +
-		 			", coment='" + this.getComent() + '\'' +		 		
+		 			", coment='" + this.getComment() + '\'' +		 		
 		 			", creationDate='" + this.getCreationDate() + '\'' +
 					'}';
 	}	

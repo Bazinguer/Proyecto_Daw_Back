@@ -11,9 +11,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Aspect
 @Component
 public class ApiLogs {
-	
-	@Pointcut(value = "execution(* com.proyecto.app.controllers.rest.*.*())")
-	 public void allResources() {
+		
+	@Pointcut("@within(org.springframework.web.bind.annotation.RestController)") 
+	public void allResources() {
         // don't need code
     }
 	
@@ -24,7 +24,7 @@ public class ApiLogs {
         for (Object arg : jp.getArgs()) {
             log.append("\n   ARG: ").append(arg);
         }
-        LogManager.getLogger(jp.getSignature().getDeclaringTypeName()).info(log);
+        LogManager.getLogger(jp.getSignature().getDeclaringTypeName()).info(log);  
     }
 
     @AfterReturning(pointcut = "allResources()", returning = "result")

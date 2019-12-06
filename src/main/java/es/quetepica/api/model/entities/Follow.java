@@ -20,15 +20,19 @@ public class Follow {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="follow_id")
 	private int id;	
-	
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="pet_profile_id")
-	private PetProfile petFollow;
+	private PetProfile pet_profile_follow_id;
 	
 	@Column(name="pet_profile_followed_id")
 	private int petFollowed;
 		
-	private LocalDateTime creationDate;	
+	private LocalDateTime creationDate;
+	
+	public Follow() {
+		this.creationDate = LocalDateTime.now();
+	}
 	
 	public int getId() {
 		return id;
@@ -39,11 +43,11 @@ public class Follow {
 	}
 
 	public PetProfile getPetFollow() {
-		return petFollow;
+		return pet_profile_follow_id;
 	}
 
 	public void setPetFollow(PetProfile petFollow) {
-		this.petFollow = petFollow;
+		this.pet_profile_follow_id = petFollow;
 	}
 
 	public int getPetFollowed() {

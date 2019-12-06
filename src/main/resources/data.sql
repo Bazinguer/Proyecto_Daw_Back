@@ -63,3 +63,10 @@
 	 CONSTRAINT FK_photo_id FOREIGN KEY (`photo_id`) REFERENCES `photos`(`photo_id`) ON UPDATE CASCADE ON DELETE CASCADE,	
 	 CONSTRAINT FK_pet_profile_id_com FOREIGN KEY (`pet_profile_id`) REFERENCES `pet_profiles`(`pet_profile_id`) ON UPDATE CASCADE ON DELETE CASCADE	 
  ) ;
+ 
+	INSERT INTO `users` (`username`, `email`, `password`, `born_date`, `registration_date`) 
+	VALUES ('Jorge', 'aaaa@gmail.com', '123456', '1989-01-20', '2019-12-04 00:00:00'),
+		   ('Maria', 'bbbb@gmail.com', 'abc', '1995-11-02', '2019-11-04 00:00:00'),
+		   ('Diego', 'cccc@gmail.com', 'abc123', '1999-03-03', '2019-10-04 00:00:00'),
+		   ('Nacho', 'dddd@gmail.com', '987654', '1987-10-10', '2019-09-04 00:00:00'),
+		   ('Rodrigo', 'eeee@gmail.com', '1111', '2000-07-07', '2019-08-04 00:00:00');

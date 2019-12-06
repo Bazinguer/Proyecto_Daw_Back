@@ -19,8 +19,9 @@ public class User {
 	@Column(name= "user_id")
 	private int id;	
 	
-	private String username;	
+	private String username;		
 	
+	@Column(unique = true)
 	private String email;
 	
 	private String password;	
@@ -34,6 +35,16 @@ public class User {
 	public User() {
 		this.registrationDate = LocalDateTime.now();
 	}
+	
+	public User(String username, String email, String password, LocalDate bornDate) {
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.bornDate = bornDate;
+		this.registrationDate = LocalDateTime.now();
+	}
+
+
 
 	public Integer getId() {
 		return id;
