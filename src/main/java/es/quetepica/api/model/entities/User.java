@@ -44,14 +44,6 @@ public class User {
 		this.registrationDate = LocalDateTime.now();
 	}
 
-/*	public User(UserWrapper userWrapper) {		
-		this.username = userWrapper.getUsername();
-		this.email = userWrapper.getEmail();
-		this.password = userWrapper.getPassword();
-		this.bornDate = userWrapper.getBornDate();		
-	}
-*/
-
 	public Integer getId() {
 		return id;
 	}

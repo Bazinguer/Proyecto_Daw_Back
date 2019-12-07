@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +20,7 @@ public class UserResource {
 
 	public static final String USERS = "/users";
 	public static final String LOGIN = "/login";	
+	public static final String PET = "/pet";
 
 	@Autowired
 	private UserController userController;	
@@ -28,15 +30,14 @@ public class UserResource {
 		return this.userController.userLogin(email, password);
 	}
 	
-	@PostMapping	
-	public UserWrapper createUser(UserWrapper userInputWrapper) {
+	@PostMapping
+	public UserWrapper createUser(@RequestBody UserWrapper userInputWrapper) {
 		return this.userController.createUser(userInputWrapper);		
 	}
 	
 	@PutMapping
-	public UserWrapper editUser(UserWrapper userInputWrapper) {
+	public UserWrapper editUser(@RequestBody UserWrapper userInputWrapper) {
 		return this.userController.editUser(userInputWrapper);
 	}
-
 
 }

@@ -47,7 +47,7 @@ public class UserServiceImpl implements IUserService {
 	public UserWrapper editUser(UserWrapper userWrapper) {
 		//Se busca usuario (), si existe se modifica el usuario existente y se devuelve el mismo usuario actualizado
 		//Si no existe se lanza una excepción badRequest		
-		Optional<User> userEdit = this.userRepository.findById(userWrapper.getId());//findByIdAndEmail(userWrapper.getId(),userWrapper.getEmail()).get();		
+		Optional<User> userEdit = this.userRepository.findById(userWrapper.getId());
 		
 		if (userEdit.isPresent()) {
 			userEdit.get().setUsername(userWrapper.getUsername());

@@ -11,17 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 public class ApiExceptionHandler {
-/*
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    @ExceptionHandler({
-            UnauthorizedException.class,
-            org.springframework.security.access.AccessDeniedException.class
-    })
-    @ResponseBody
-    public void unauthorizedRequest(HttpServletRequest request, Exception exception) {
-        //Empty. Nothing to do
-    }
-*/
+	
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler({
             NotFoundException.class

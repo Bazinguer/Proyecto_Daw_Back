@@ -1,6 +1,11 @@
 package es.quetepica.api.wrappers;
 
-import java.time.LocalDate;
+import java.util.Date;
+
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import es.quetepica.api.model.entities.PetProfile;
 import es.quetepica.api.model.entities.User;
@@ -8,25 +13,30 @@ import es.quetepica.api.model.entities.User;
 
 public class PetProfileWrapper {
 
-	private User user;	
+	private Integer id;
+
+	private User user;			
 	
-	private String nick;
-	
-	private String sexo;
-	
+	private String nick;	
+
+	private String sexo;	
+
 	private String raza;
-	
-	private String imgProfile;	
-	
-	private String description;		
-	
-	private LocalDate petBornDate;	
-	
-	public PetProfileWrapper() {
 		
+	private String imgProfile;	
+
+	private String description;		
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)		
+	private Date petBornDate;	
+
+	public PetProfileWrapper() {
+
 	}
-	
+
 	public PetProfileWrapper(PetProfile petProfile) {
+		this.id = petProfile.getId();
 		this.user = petProfile.getUser();
 		this.nick = petProfile.getNick();
 		this.sexo = petProfile.getSexo();
@@ -35,7 +45,16 @@ public class PetProfileWrapper {
 		this.description = petProfile.getDescription();
 		this.petBornDate = petProfile.getPetBornDate();
 	}
-		
+
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public User getUser() {
 		return user;
 	}
@@ -84,25 +103,26 @@ public class PetProfileWrapper {
 		this.description = description;
 	}
 
-	public LocalDate getPetBornDate() {
+	public Date getPetBornDate() {
 		return petBornDate;
 	}
 
-	public void setPetBornDate(LocalDate petBornDate) {
+	public void setPetBornDate(Date petBornDate) {
 		this.petBornDate = petBornDate;
 	}
 
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "PetProfileWrapper{ " +		 			
-		 			", User='" + this.getUser()+ '\'' +
-		 			", nick='" + this.getNick() + '\'' +
-		 			", sexo='" + this.getSexo() + '\'' +
-		 			", raza='" + this.getRaza() + '\'' +
-		 			", petBornDate='" + this.getPetBornDate() + '\'' +
-		 			", description=" + this.getDescription() +
-		 			", imgProfile=" + this.getImgProfile() +
-					'}';
+		return "PetProfileWrapper{ " +		 		
+		"  id='" + this.getId() + '\'' +
+		", User='" + this.getUser()+ '\'' +
+		", nick='" + this.getNick() + '\'' +
+		", sexo='" + this.getSexo() + '\'' +
+		", raza='" + this.getRaza() + '\'' +
+		", petBornDate='" + this.getPetBornDate() + '\'' +
+		", description=" + this.getDescription() +
+		", imgProfile=" + this.getImgProfile() +
+		'}';
 	}
 }

@@ -1,8 +1,7 @@
 package es.quetepica.api.model.entities;
 
-import java.time.LocalDate;
+import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -20,27 +20,51 @@ public class PetProfile {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name= "pet_profile_id")
-	private int id;	
-	
-	@ManyToOne(cascade = CascadeType.ALL)
+	private Integer id;	
+
+	@ManyToOne
 	@JoinColumn(name="user_id")	
+	@NotNull 
 	private User user;	
-	
+
+	@Column(unique = true)
+	@NotNull 
 	private String nick;
-	
+
 	private String sexo;
-	
+
 	private String raza;	
-	
+
 	@Column(name= "img_profile")
 	private String imgProfile;
-	
+
 	private String description;	
 
 	@Column(name= "pet_borndate")
-	private LocalDate petBornDate;	
+	private Date petBornDate;
+
+	public PetProfile() {		
+
+	}	
 	
-	
+	public PetProfile(User user, String nick,String description) {		
+		this.user = user;
+		this.nick = nick;	
+		this.description = description;		
+	}	
+
+
+	public PetProfile(User user, String nick, String sexo, String raza, String imgProfile,
+			String description, Date petBornDate) {		
+		this.user = user;
+		this.nick = nick;
+		this.sexo = sexo;
+		this.raza = raza;
+		this.imgProfile = imgProfile;
+		this.description = description;
+		this.petBornDate = petBornDate;
+	}
+
 	public User getUser() {
 		return user;
 	}
@@ -73,11 +97,11 @@ public class PetProfile {
 		this.raza = raza;
 	}
 
-	public LocalDate getPetBornDate() {
+	public Date getPetBornDate() {
 		return petBornDate;
 	}
 
-	public void setPetBornDate(LocalDate petBornDate) {
+	public void setPetBornDate(Date petBornDate) {
 		this.petBornDate = petBornDate;
 	}
 
@@ -88,12 +112,12 @@ public class PetProfile {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-		
-	public int getId() {
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -109,14 +133,14 @@ public class PetProfile {
 	public String toString() {
 		// TODO Auto-generated method stub
 		return "PetProfile{ " +
-		 			"id='" + this.getId() + '\'' +
-		 			", User='" + this.getUser()+ '\'' +
-		 			", nick='" + this.getNick() + '\'' +
-		 			", sexo='" + this.getSexo() + '\'' +
-		 			", raza='" + this.getRaza() + '\'' +
-		 			", petBornDate='" + this.getPetBornDate() + '\'' +
-		 			", description=" + this.getDescription() +
-		 			", imgProfile=" + this.getImgProfile() +
-					'}';
+		"id='" + this.getId() + '\'' +
+		", User='" + this.getUser()+ '\'' +
+		", nick='" + this.getNick() + '\'' +
+		", sexo='" + this.getSexo() + '\'' +
+		", raza='" + this.getRaza() + '\'' +
+		", petBornDate='" + this.getPetBornDate() + '\'' +
+		", description=" + this.getDescription() +
+		", imgProfile=" + this.getImgProfile() +
+		'}';
 	}
 }
