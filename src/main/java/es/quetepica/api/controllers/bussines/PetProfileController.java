@@ -1,5 +1,7 @@
 package es.quetepica.api.controllers.bussines;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -22,5 +24,10 @@ public class PetProfileController {
 		
 		public PetProfileWrapper editDesciptionPetProfile(PetProfileWrapper petProfileWrapper) {			
 			return this.petProfileServiceImpl.editDesciptionPetProfile(petProfileWrapper);			
+		}
+			
+		public List<PetProfileWrapper> listPetProfile(Integer userId){
+			return this.petProfileServiceImpl.listPetProfile(userId);	
+			
 		}
 }

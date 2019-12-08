@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import es.quetepica.api.model.entities.PhotoComment;
 
 @Repository
-public interface PhotoCommentRepository extends JpaRepository<PhotoComment,Long>{
+public interface PhotoCommentRepository extends JpaRepository<PhotoComment,Integer>{
 
 }

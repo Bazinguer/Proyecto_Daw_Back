@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import es.quetepica.api.model.entities.Photo;
 
 @Repository
-public interface PhotoRepository extends JpaRepository <Photo,Long> {
+public interface PhotoRepository extends JpaRepository <Photo,Integer> {
 
 }

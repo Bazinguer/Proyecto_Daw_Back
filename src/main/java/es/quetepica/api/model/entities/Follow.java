@@ -2,7 +2,6 @@ package es.quetepica.api.model.entities;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,43 +18,57 @@ public class Follow {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="follow_id")
-	private int id;	
+	private Integer id;	
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="pet_profile_id")
-	private PetProfile pet_profile_follow_id;
+	@ManyToOne
+	@JoinColumn(name="petprofile_id")
+	private PetProfile petprofile;
 	
-	@Column(name="pet_profile_followed_id")
-	private int petFollowed;
+	@Column(name="petprofilefollowed_id")
+	private Integer followed;
 		
 	private LocalDateTime creationDate;
 	
 	public Follow() {
 		this.creationDate = LocalDateTime.now();
-	}
+	}	
 	
-	public int getId() {
+	public Follow(PetProfile petprofile, Integer followedId) {	
+		this();
+		this.petprofile = petprofile;
+		this.followed = followedId;
+	}
+		
+
+	public Follow(Integer id, PetProfile petprofile, Integer followed, LocalDateTime creationDate) {	
+		this.id = id;
+		this.petprofile = petprofile;
+		this.followed = followed;
+		this.creationDate = creationDate;
+	}
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public PetProfile getPetFollow() {
-		return pet_profile_follow_id;
+	public PetProfile getFollowid() {
+		return petprofile;
 	}
 
-	public void setPetFollow(PetProfile petFollow) {
-		this.pet_profile_follow_id = petFollow;
+	public void setFollowid(PetProfile petprofile) {
+		this.petprofile = petprofile;
 	}
 
-	public int getPetFollowed() {
-		return petFollowed;
+	public Integer getFollowedid() {
+		return followed;
 	}
 
-	public void setPetFollowed(int petFollowed) {
-		this.petFollowed = petFollowed;
+	public void setFollowedid(Integer followedid) {
+		this.followed = followedid;
 	}
 
 	public LocalDateTime getCreationDate() {
@@ -66,14 +79,13 @@ public class Follow {
 		this.creationDate = creationDate;
 	}
 
-
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
 		return "Follow{ " +
 		 			"id='" + this.getId() + '\'' +
-		 			", idFollow='" + this.getPetFollow()+ '\'' +
-		 			", idFollowed='" + this.getPetFollowed()+ '\'' +
+		 			", idFollow='" + this.getFollowid()+ '\'' +
+		 			", idFollowed='" + this.getFollowedid()+ '\'' +
 		 			", creationDate='" + this.getCreationDate() + '\'' +
 					'}';
 	}

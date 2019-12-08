@@ -1,5 +1,7 @@
 package es.quetepica.api.model.services.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,6 @@ import es.quetepica.api.model.entities.PetProfile;
 import es.quetepica.api.model.repositories.PetProfileRepository;
 import es.quetepica.api.model.services.IPetProfileService;
 import es.quetepica.api.wrappers.PetProfileWrapper;
-
 
 @Service
 public class PetProfileServiceImpl implements IPetProfileService {
@@ -68,13 +69,32 @@ public class PetProfileServiceImpl implements IPetProfileService {
 			try {
 				return new PetProfileWrapper(this.petProfileRepository.save(petProfileEdit.get()));
 			} catch (Exception e) {
-				throw new BadRequestException("dfsgfsdgf");
+				throw new BadRequestException("Problema al guardar el campo editado en la base de datos.");
 			}
 
 		}else {
 			throw new BadRequestException("No se ha podido actualizar la descripción del perfil.");
 		}
 
+	}
+
+	@Override
+	public List<PetProfileWrapper> listPetProfile(Integer userId) {
+
+		Optional<List<PetProfile>> listPetProfileUser = this.petProfileRepository.findAllByUserId(userId);
+
+		if (listPetProfileUser.isPresent()) {
+			
+			List<PetProfileWrapper> listPetProfileWrapper = new ArrayList<PetProfileWrapper>();
+			
+				for(PetProfile petProfile: listPetProfileUser.get()) {
+					listPetProfileWrapper.add(new PetProfileWrapper(petProfile));
+				}
+				return listPetProfileWrapper;			
+
+		}else {
+			throw new NotFoundException("No se encuentran perfiles. Revisa la petición");
+		}
 	}
 
 }

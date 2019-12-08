@@ -31,10 +31,21 @@ public class Photo {
 
 	@Column(name="creation_date")
 	private LocalDateTime creationDate;
+	
+	private String url;
 
 	public Photo() {
 		this.creationDate = LocalDateTime.now();
 
+	}	
+	
+	public Photo(PetProfile petProfile,String url ,String title, String shortDesciprion) {
+		this();
+		this.petProfile = petProfile;
+		this.url = url;
+		this.title = title;
+		this.shortDesciprion = shortDesciprion;
+		
 	}
 
 	public int getId() {
@@ -43,6 +54,14 @@ public class Photo {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public PetProfile getPetProfile() {
@@ -82,6 +101,7 @@ public class Photo {
 		// TODO Auto-generated method stub
 		return "Photo{ " +
 		"id='" + this.getId() + '\'' +
+		"url='" + this.getUrl() + '\'' +
 		", idPetProfile='" + this.getPetProfile() + '\'' +
 		", title='" + this.getTitle() + '\'' +
 		", shortDesciprion='" + this.getShortDesciprion() + '\'' +		 			

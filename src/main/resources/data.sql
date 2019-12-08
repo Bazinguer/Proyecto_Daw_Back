@@ -32,8 +32,8 @@
 -- profile_follow_id es clave foranea y principal ,`profile_follow_id`),
  CREATE TABLE IF NOT EXISTS `follows`(
 	`follow_id` int NOT NULL AUTO_INCREMENT,	
-	`pet_profile_follow_id` int NOT NULL,
-	`pet_profile_followed_id` int NOT NULL,	
+	`petprofile` int NOT NULL,
+	`petprofilefollowed_id` int NOT NULL,	
 	`creation_date` datetime DEFAULT NULL,	
 	PRIMARY KEY (`follow_id`),
 	CONSTRAINT FK_pet_profile_id_fo FOREIGN KEY (`pet_profile_follow_id`) REFERENCES `pet_profiles`(`pet_profile_id`) ON UPDATE CASCADE ON DELETE CASCADE	
@@ -45,6 +45,7 @@
  CREATE TABLE IF NOT EXISTS `photos`(
 	`photo_id` int NOT NULL AUTO_INCREMENT,
 	`pet_profile_id` int NOT NULL,
+	`url` varchar(190) NOT NULL,
  	`title` varchar(50) NOT NULL,
 	`shortDesciprion` varchar(191) NOT NULL,
 	`creation_date` datetime DEFAULT NULL,	
