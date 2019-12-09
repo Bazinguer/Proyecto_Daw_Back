@@ -36,7 +36,7 @@
 	`petprofilefollowed_id` int NOT NULL,	
 	`creation_date` datetime DEFAULT NULL,	
 	PRIMARY KEY (`follow_id`),
-	CONSTRAINT FK_pet_profile_id_fo FOREIGN KEY (`pet_profile_follow_id`) REFERENCES `pet_profiles`(`pet_profile_id`) ON UPDATE CASCADE ON DELETE CASCADE	
+	CONSTRAINT FK_pet_profile_id_fo FOREIGN KEY (`petprofile`) REFERENCES `pet_profiles`(`pet_profile_id`) ON UPDATE CASCADE ON DELETE CASCADE	
  ) ;
  
 -- Creamos tabla photos
@@ -62,12 +62,32 @@
 	`creation_date` datetime DEFAULT NULL,	
 	 PRIMARY KEY (`comment_id`),
 	 CONSTRAINT FK_photo_id FOREIGN KEY (`photo_id`) REFERENCES `photos`(`photo_id`) ON UPDATE CASCADE ON DELETE CASCADE,	
-	 CONSTRAINT FK_pet_profile_id_com FOREIGN KEY (`pet_profile_id`) REFERENCES `pet_profiles`(`pet_profile_id`) ON UPDATE CASCADE ON DELETE CASCADE	 
+	 CONSTRAINT FK_pet_profile_id_com FOREIGN KEY (`pet_profile_id`) REFERENCES `pet_profiles`(`pet_profile_id`) ON UPDATE CASCADE ON DELETE CASCADE	
  ) ;
  
 	INSERT INTO `users` (`username`, `email`, `password`, `born_date`, `registration_date`) 
-	VALUES ('Jorge', 'aaaa@gmail.com', '123456', '1989-01-20', '2019-12-04 00:00:00'),
-		   ('Maria', 'bbbb@gmail.com', 'abc', '1995-11-02', '2019-11-04 00:00:00'),
-		   ('Diego', 'cccc@gmail.com', 'abc123', '1999-03-03', '2019-10-04 00:00:00'),
-		   ('Nacho', 'dddd@gmail.com', '987654', '1987-10-10', '2019-09-04 00:00:00'),
-		   ('Rodrigo', 'eeee@gmail.com', '1111', '2000-07-07', '2019-08-04 00:00:00');
+	VALUES ('Jorge', '1111@gmail.com', '1111', '1989-01-20', '2019-12-04 00:00:00'),
+		   ('Maria', '2222@gmail.com', '2222', '1995-11-02', '2019-11-04 00:00:00'),
+		   ('Diego', '3333@gmail.com', '3333', '1999-03-03', '2019-10-04 00:00:00'),
+		   ('Rocio', '4444@gmail.com', '4444', '2001-08-01', '2019-09-04 00:00:00'),
+		   ('Rodri', '5555@gmail.com', '5555', '2000-07-07', '2019-08-04 00:00:00');
+		   
+	INSERT INTO `pet_profiles` (`user_id`, `nick`, `sexo`, `raza`, `img_profile`,`description`,`pet_borndate`) 
+	VALUES (1, 'nick1','h','Raza1', 'C:\Users\Bazinga','description1','2009-12-04 00:00:00'),
+		   (1, 'nick2','m','Raza2', 'C:\Users\Bazinga','description2','2019-11-04 00:00:00'),
+		   (2, 'nick3','m','Raza3', 'C:\Users\Bazinga','description3','2005-10-04 00:00:00'),
+		   (3, 'nick4','h','Raza4', 'C:\Users\Bazinga','description4','2008-09-04 00:00:00'),
+		   (3, 'nick5','h','Raza5', 'C:\Users\Bazinga','description5','2009-08-04 00:00:00'),
+		   (4, 'nick6','m','Raza6', 'C:\Users\Bazinga','description6','2010-10-04 00:00:00'),
+		   (5, 'nick7','h','Raza7', 'C:\Users\Bazinga','description7','2017-09-04 00:00:00');	
+
+	INSERT INTO `follows` (`petprofile_id`, `petprofilefollowed_id`, `creation_date`) 
+	VALUES (1,2,'2019-12-04 00:00:00'),
+		   (1,3,'2019-11-04 00:00:00'),
+		   (1,4,'2019-10-04 00:00:00'),
+		   (2,1,'2019-09-04 00:00:00'),
+		   (2,3,'2019-08-04 00:00:00'),
+		   (3,2,'2019-10-04 00:00:00'),
+		   (4,5,'2019-09-04 00:00:00'),		
+		   (5,2,'2019-09-04 00:00:00'),
+		   (5,3,'2019-09-04 00:00:00'); 

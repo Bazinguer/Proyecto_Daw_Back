@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -14,17 +15,22 @@ import es.quetepica.api.model.entities.User;
 public class PetProfileWrapper {
 
 	private Integer id;
-
+	
+	@NotNull
 	private User user;			
 	
+	@NotNull
 	private String nick;	
-
+	
+	@NotNull
 	private String sexo;	
 
+	@NotNull
 	private String raza;
 		
 	private String imgProfile;	
-
+	
+	@NotNull
 	private String description;		
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")

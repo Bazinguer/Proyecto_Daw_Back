@@ -7,6 +7,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ import es.quetepica.api.model.entities.Photo;
 import es.quetepica.api.model.repositories.PetProfileRepository;
 import es.quetepica.api.model.repositories.PhotoRepository;
 import es.quetepica.api.model.services.IPhotoService;
+import es.quetepica.api.wrappers.PhotoWrapper;
 
 @Service
 public class PhotoServiceImpl implements IPhotoService {
@@ -87,6 +90,38 @@ public class PhotoServiceImpl implements IPhotoService {
 			throw new NotFoundException("No se ha encontrado ningún registro con los datos facilitados.");
 		}
 
+	}
+
+	@Override
+	public PhotoWrapper procurePhoto(Integer photoId) {		
+		
+		Optional<Photo> findPhoto = this.photoRepository.findById(photoId);
+		
+		if (findPhoto.isPresent()) {			
+			return new PhotoWrapper(this.photoRepository.findById(photoId).get());
+		} else {
+			throw new NotFoundException("No se enontró ninguna foto con ese ID");
+		}
+		
+	}
+
+	@Override
+	public List<PhotoWrapper> procureListPhotos(Integer petProfileId) {
+		
+		 Optional<List<Photo>> listProfilePhotos = this.photoRepository.findAllByPetprofileId(petProfileId);	
+		 
+		 if (listProfilePhotos.isPresent()) {			
+			 
+			List<PhotoWrapper> listPhotos = new ArrayList<PhotoWrapper>();
+				
+				for(Photo photo: listProfilePhotos.get()) {
+					listPhotos.add(new PhotoWrapper(photo));
+				}
+				return listPhotos;		
+				
+			}else {
+				throw new NotFoundException("No se encuentran fotos asociadas al perfil. Revisa la petición");
+			}
 	}
 
 }

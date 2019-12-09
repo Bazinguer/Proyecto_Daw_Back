@@ -31,28 +31,13 @@ public class UserWrapper {
 
 	}
 	
-	public UserWrapper(Integer id, String email) {	
-		this.id = id;
-		this.email = email;		
-	}
-
-	public UserWrapper(String username, String email, String password, Date bornDate) {	
-		this.username = username;
-		this.email = email;
-		this.password = password;
-		this.bornDate = bornDate;
-	}
-
-
 	public UserWrapper(User user) {
 		this.id = user.getId();
 		this.username = user.getUsername();	
 		this.email = user.getEmail();
 		this.password = user.getPassword();		
-		this.bornDate = user.getBornDate();		
-			
-	}
-	
+		this.bornDate = user.getBornDate();				
+	}	
 	
 	public Integer getId() {
 		return id;

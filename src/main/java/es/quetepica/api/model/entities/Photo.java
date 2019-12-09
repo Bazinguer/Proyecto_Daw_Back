@@ -2,7 +2,6 @@ package es.quetepica.api.model.entities;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,17 +20,17 @@ public class Photo {
 	@Column(name= "photo_id")
 	private int id;	
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="pet_profile_id")	
-	private PetProfile petProfile;
+	private PetProfile petprofile;
 
 	private String title;
 
-	private String shortDesciprion;	
+	private String short_desciprion;	
 
 	@Column(name="creation_date")
-	private LocalDateTime creationDate;
-	
+	private LocalDateTime creationDate;	
+
 	private String url;
 
 	public Photo() {
@@ -41,10 +40,10 @@ public class Photo {
 	
 	public Photo(PetProfile petProfile,String url ,String title, String shortDesciprion) {
 		this();
-		this.petProfile = petProfile;
+		this.petprofile = petProfile;
 		this.url = url;
 		this.title = title;
-		this.shortDesciprion = shortDesciprion;
+		this.short_desciprion = shortDesciprion;
 		
 	}
 
@@ -65,11 +64,11 @@ public class Photo {
 	}
 
 	public PetProfile getPetProfile() {
-		return petProfile;
+		return petprofile;
 	}
 
 	public void setPetProfile(PetProfile petProfile) {
-		this.petProfile = petProfile;
+		this.petprofile = petProfile;
 	}
 
 	public String getTitle() {
@@ -81,11 +80,11 @@ public class Photo {
 	}
 
 	public String getShortDesciprion() {
-		return shortDesciprion;
+		return short_desciprion;
 	}
 
 	public void setShortDesciprion(String shortDesciprion) {
-		this.shortDesciprion = shortDesciprion;
+		this.short_desciprion = shortDesciprion;
 	}
 
 	public LocalDateTime getCreationDate() {

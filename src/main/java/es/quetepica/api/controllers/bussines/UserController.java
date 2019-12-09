@@ -1,11 +1,8 @@
 package es.quetepica.api.controllers.bussines;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import es.quetepica.api.model.entities.User;
 import es.quetepica.api.model.services.impl.UserServiceImpl;
 import es.quetepica.api.wrappers.UserWrapper;
 
@@ -13,9 +10,13 @@ import es.quetepica.api.wrappers.UserWrapper;
 public class UserController {
 
 	@Autowired
-	private UserServiceImpl userServiceImpl;
+	private UserServiceImpl userServiceImpl;	
+	
+	public UserWrapper getUserById(Integer userId) {
+		return this.userServiceImpl.getUserById(userId);
+	};
 
-	public Optional<User> userLogin(String email, String password) {
+	public UserWrapper userLogin(String email, String password) {
 		return this.userServiceImpl.userLogin(email,password);	
 	};
 

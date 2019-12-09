@@ -44,8 +44,9 @@ public class FollowServiceImpl implements IFollowService {
 	}
 
 	@Override
-	public List<FollowWrapper> listFollow(Integer userId) {
-		Optional<List<Follow>> listFollow = this.followRepository.findAllByPetprofileId(userId);
+	public List<FollowWrapper> listFollow(Integer petProfileId) {
+		
+		Optional<List<Follow>> listFollow = this.followRepository.findAllByPetprofileId(petProfileId);
 
 		if (listFollow.isPresent()) {
 
@@ -64,13 +65,10 @@ public class FollowServiceImpl implements IFollowService {
 	@Override
 	public String deleteFollow(Integer idFollow, Integer idFollowed) {
 
-		Optional<FollowWrapper> follow = this.followRepository.findByPetprofileIdAndFollowed(idFollow, idFollowed);
+		Optional<Follow> follow = this.followRepository.findByPetprofileIdAndFollowed(idFollow, idFollowed);
 
 		if (follow.isPresent()) {	
-			
-			Follow deleteFollow = new Follow(follow.get().getId(),follow.get().getPetprofile(), follow.get().getPetFollowed(), follow.get().getCreationDate());
-			
-			this.followRepository.delete(deleteFollow);			
+			this.followRepository.delete(follow.get());			
 			return "Se ha eliminado correctamente";
 		}else {
 			throw new NotFoundException("No se ha encontrado ningún registro con los datos facilitados.");

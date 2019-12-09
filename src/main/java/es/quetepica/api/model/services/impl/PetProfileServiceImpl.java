@@ -23,28 +23,22 @@ public class PetProfileServiceImpl implements IPetProfileService {
 
 	@Override
 	public PetProfileWrapper createPetProfile(PetProfileWrapper petProfileWrapper) {
-		//Se busca por nick el perfil de la mascota, si no existe se crea
-		//Si existe lanzamos una excepción de conflicto	
 
-		if (this.petProfileRepository.findByIdAndNick(petProfileWrapper.getId(),petProfileWrapper.getNick()).isPresent()) {			
+		Optional<PetProfile> petProfile = this.petProfileRepository.findByIdAndNick(petProfileWrapper.getId(),petProfileWrapper.getNick());
+
+		if (petProfile.isPresent()) {			
 			throw new ConflictException("Se ha encontrado un perfil de mascota con los datos facilitados.");			
 		}
-
-		PetProfile petProfile = new PetProfile(petProfileWrapper.getUser(),petProfileWrapper.getNick(),petProfileWrapper.getSexo(),petProfileWrapper.getRaza(),petProfileWrapper.getImgProfile(),petProfileWrapper.getDescription(),petProfileWrapper.getPetBornDate());
-
-		try {
-			return new PetProfileWrapper(this.petProfileRepository.save(petProfile));
-		} catch (Exception e) {
-			throw new BadRequestException("Problema al insertar en la base de datos.Compruebe estructura JSON, o el nick ya existe");
+		else {
+			PetProfile petProfileInsert = new PetProfile(petProfileWrapper.getUser(),petProfileWrapper.getNick(),petProfileWrapper.getSexo(),petProfileWrapper.getRaza(),petProfileWrapper.getImgProfile(),petProfileWrapper.getDescription(),petProfileWrapper.getPetBornDate());
+			return new PetProfileWrapper(this.petProfileRepository.save(petProfileInsert));
 		}
-
 
 	}
 
 	@Override
 	public String deletePetProfile(Integer id,String nick) {
-		//Se busca perfilde la mascota, si existe se elimina
-		//Si no existe se lanza una excepción notFound	
+	
 		Optional<PetProfile> petProfileEdit = this.petProfileRepository.findById(id);
 
 		if (petProfileEdit.isPresent()) {
@@ -59,19 +53,14 @@ public class PetProfileServiceImpl implements IPetProfileService {
 
 	@Override
 	public PetProfileWrapper editDesciptionPetProfile(PetProfileWrapper petProfileWrapper) {
-		//Se busca perfilde la mascota, si existe se modifica y se devuelve
-		//Si no existe se lanza una excepción badRequest	
+	
 		Optional<PetProfile> petProfileEdit = this.petProfileRepository.findById(petProfileWrapper.getId());
 
 		if (petProfileEdit.isPresent()) {
 			petProfileEdit.get().setDescription(petProfileWrapper.getDescription());
-
-			try {
-				return new PetProfileWrapper(this.petProfileRepository.save(petProfileEdit.get()));
-			} catch (Exception e) {
-				throw new BadRequestException("Problema al guardar el campo editado en la base de datos.");
-			}
-
+			
+			return new PetProfileWrapper(this.petProfileRepository.save(petProfileEdit.get()));
+			
 		}else {
 			throw new BadRequestException("No se ha podido actualizar la descripción del perfil.");
 		}

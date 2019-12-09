@@ -2,6 +2,8 @@ package es.quetepica.api.wrappers;
 
 import java.time.LocalDateTime;
 
+import javax.validation.constraints.NotNull;
+
 import es.quetepica.api.model.entities.Follow;
 import es.quetepica.api.model.entities.PetProfile;
 
@@ -9,10 +11,13 @@ public class FollowWrapper {
 	
 	private Integer id;
 
+	@NotNull	
 	private Integer petFollow;
 	
+	@NotNull
 	private PetProfile petprofile;
 
+	@NotNull
 	private Integer petFollowed;
 	
 	private LocalDateTime creationDate;
@@ -73,9 +78,10 @@ public class FollowWrapper {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "FollowWrapper{ " +		 		
-		 			", idFollow='" + this.getPetFollow()+ '\'' +
-		 			", idFollowed='" + this.getPetFollowed()+ '\'' +
+		return "FollowWrapper{ " +
+				    ", id='" + this.getId() + '\'' +
+		 			", idFollow='" + this.getPetFollow() + '\'' +
+		 			", idFollowed='" + this.getPetFollowed() + '\'' +
 		 			", creationDate='" + this.getCreationDate() + '\'' +
 					'}';
 	}

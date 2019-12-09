@@ -6,9 +6,9 @@ import es.quetepica.api.wrappers.PetProfileWrapper;
 
 public interface IPetProfileService {
 		
-	public PetProfileWrapper createPetProfile(PetProfileWrapper petProfileWrapper);		
-	public String deletePetProfile(Integer id,String nick);
-	public PetProfileWrapper editDesciptionPetProfile(PetProfileWrapper petProfileWrapper);
-	public List<PetProfileWrapper> listPetProfile(Integer userId);
+	PetProfileWrapper createPetProfile(PetProfileWrapper petProfileWrapper);		
+	String deletePetProfile(Integer id,String nick);
+	PetProfileWrapper editDesciptionPetProfile(PetProfileWrapper petProfileWrapper);
+	List<PetProfileWrapper> listPetProfile(Integer userId);
 
 }

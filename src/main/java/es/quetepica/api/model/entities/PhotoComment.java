@@ -2,7 +2,6 @@ package es.quetepica.api.model.entities;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,11 +20,11 @@ public class PhotoComment {
 	@Column(name="comment_id")
 	private int id;	
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="photo_id")	
 	private Photo photo;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="pet_profile_id")	
 	private PetProfile petProfile;
 	

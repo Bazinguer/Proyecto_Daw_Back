@@ -21,12 +21,13 @@ public class Follow {
 	private Integer id;	
 
 	@ManyToOne
-	@JoinColumn(name="petprofile_id")
+	@JoinColumn(name="pet_profile_id")
 	private PetProfile petprofile;
 	
 	@Column(name="petprofilefollowed_id")
 	private Integer followed;
-		
+	
+	@Column(name="creation_date")
 	private LocalDateTime creationDate;
 	
 	public Follow() {
@@ -37,14 +38,6 @@ public class Follow {
 		this();
 		this.petprofile = petprofile;
 		this.followed = followedId;
-	}
-		
-
-	public Follow(Integer id, PetProfile petprofile, Integer followed, LocalDateTime creationDate) {	
-		this.id = id;
-		this.petprofile = petprofile;
-		this.followed = followed;
-		this.creationDate = creationDate;
 	}
 
 	public Integer getId() {

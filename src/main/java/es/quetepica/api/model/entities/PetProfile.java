@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
 
 @Entity
 @Table(name="pet_profiles")
@@ -23,12 +21,10 @@ public class PetProfile {
 	private Integer id;	
 
 	@ManyToOne
-	@JoinColumn(name="user_id")	
-	@NotNull 
+	@JoinColumn(name="user_id")		
 	private User user;	
 
-	@Column(unique = true)
-	@NotNull 
+	@Column(unique = true)	 
 	private String nick;
 
 	private String sexo;
