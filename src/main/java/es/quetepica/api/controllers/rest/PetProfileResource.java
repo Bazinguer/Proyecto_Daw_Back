@@ -33,7 +33,12 @@ public class PetProfileResource {
 	@GetMapping(value = LISTPROFILE)
 	public List<PetProfileWrapper> listPetProfileUser(Integer userId){
 		return this.petProfileController.listPetProfile(userId);			
-	}		
+	}
+	
+	@GetMapping
+	public PetProfileWrapper procurePetProfile(Integer petProfileId){
+		return this.petProfileController.procurePetProfile(petProfileId);			
+	}	
 	
 	@DeleteMapping
 	public String deletePetProfile(Integer id,String nick) {

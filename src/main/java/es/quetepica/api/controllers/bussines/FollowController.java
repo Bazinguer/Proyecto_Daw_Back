@@ -16,14 +16,16 @@ public class FollowController {
 		private FollowServiceImpl followServiceImpl;
 		
 		public FollowWrapper createFollow(Integer idFollow,Integer idFollowed) {
-			
-			System.out.println("******Entrandoooo no controller");
 			return this.followServiceImpl.createFollow(idFollow,idFollowed);
 		}
 		
 		public List<FollowWrapper> listFollow(Integer userId){
 			return this.followServiceImpl.listFollow(userId);
 		}	
+		
+		public List<FollowWrapper> listFollowed(Integer petProfileId){
+			return this.followServiceImpl.listFollowed(petProfileId);
+		}
 
 		public String deleteFollow(Integer idFollow,Integer idFollowed) {	
 			return this.followServiceImpl.deleteFollow(idFollow, idFollowed);			

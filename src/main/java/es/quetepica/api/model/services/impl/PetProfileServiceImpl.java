@@ -86,4 +86,15 @@ public class PetProfileServiceImpl implements IPetProfileService {
 		}
 	}
 
+	@Override
+	public PetProfileWrapper procurePetProfile(Integer petProfileId) {
+		Optional<PetProfile> petProfile = this.petProfileRepository.findById(petProfileId);
+		if (petProfile.isPresent()) {			
+				return new PetProfileWrapper(petProfile.get());			
+
+		}else {
+			throw new NotFoundException("No se encuentran perfiles. Revisa la petición");
+		}
+	}
+
 }

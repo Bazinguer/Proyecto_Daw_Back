@@ -76,4 +76,22 @@ public class FollowServiceImpl implements IFollowService {
 
 	}
 
+	@Override
+	public List<FollowWrapper> listFollowed(Integer petProfileId) {
+		Optional<List<Follow>> listFollowed = this.followRepository.findAllByFollowed(petProfileId);
+
+		if (listFollowed.isPresent()) {
+
+			List<FollowWrapper> listFollowedWrapper = new ArrayList<FollowWrapper>();
+
+			for(Follow petfollow: listFollowed.get()) {
+				listFollowedWrapper.add(new FollowWrapper(petfollow));
+			}
+			return listFollowedWrapper;			
+
+		}else {
+			throw new NotFoundException("No sigue a nadie o la petición no escorrecta");
+		}
+	}
+
 }

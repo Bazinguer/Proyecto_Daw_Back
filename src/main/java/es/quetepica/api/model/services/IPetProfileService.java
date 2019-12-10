@@ -10,5 +10,6 @@ public interface IPetProfileService {
 	String deletePetProfile(Integer id,String nick);
 	PetProfileWrapper editDesciptionPetProfile(PetProfileWrapper petProfileWrapper);
 	List<PetProfileWrapper> listPetProfile(Integer userId);
+	PetProfileWrapper procurePetProfile(Integer petProfileId);
 
 }

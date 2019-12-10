@@ -24,14 +24,18 @@ public class FollowResource {
 	private FollowController followController;
 	
 	@PostMapping
-	public FollowWrapper createFollow(Integer idFollow,Integer idFollowed) {
-		System.out.println("Entrandoooooooooooooo rest_controller");
+	public FollowWrapper createFollow(Integer idFollow,Integer idFollowed) {	
 		return this.followController.createFollow(idFollow,idFollowed);
 	}	
 	
 	@GetMapping(value = LISTFOLLOW)
-	public List<FollowWrapper> listFollows(Integer userId){
-		return this.followController.listFollow(userId);			
+	public List<FollowWrapper> listFollows(Integer idFollow){
+		return this.followController.listFollow(idFollow);			
+	}
+	
+	@GetMapping
+	public List<FollowWrapper> listFollowed(Integer idFollow){
+		return this.followController.listFollowed(idFollow);			
 	}		
 	
 	@DeleteMapping

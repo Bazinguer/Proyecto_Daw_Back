@@ -30,4 +30,9 @@ public class PetProfileController {
 			return this.petProfileServiceImpl.listPetProfile(userId);	
 			
 		}
+		
+		public PetProfileWrapper procurePetProfile(Integer petProfileId){
+			return this.petProfileServiceImpl.procurePetProfile(petProfileId);
+			
+		}
 }

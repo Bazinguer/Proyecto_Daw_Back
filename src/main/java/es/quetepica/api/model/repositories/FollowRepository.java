@@ -14,7 +14,9 @@ public interface FollowRepository extends JpaRepository<Follow,Integer>{
 	
 	Optional<Follow> findByPetprofileIdAndFollowed(Integer followId, Integer followedId);	
 	
-	Optional<List<Follow>> findAllByPetprofileId(Integer userId);
+	Optional<List<Follow>> findAllByPetprofileId(Integer followId);
+	
+	Optional<List<Follow>> findAllByFollowed(Integer followId);
 
 	Optional<Follow> findByPetprofileAndFollowed(Integer followId, Integer followedId);
 }
