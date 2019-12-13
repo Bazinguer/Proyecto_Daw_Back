@@ -6,15 +6,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import es.quetepica.api.configurations.exceptions.FileException;
@@ -29,9 +26,9 @@ import es.quetepica.api.wrappers.PhotoWrapper;
 @Service
 public class PhotoServiceImpl implements IPhotoService {
 
-	@Value("${app.upload.dir:${user.home}}")
-	public String uploadDir;
-
+	
+	public String uploadDir = "S:\\Xampp\\htdocs\\img\\";
+	
 	@Autowired
 	private PhotoRepository photoRepository;
 
@@ -40,14 +37,17 @@ public class PhotoServiceImpl implements IPhotoService {
 
 	@Override
 	public String uploadPhoto(MultipartFile file,Integer petProfileId,String title, String shortDesciprion) {		
-		try {
-			Path copyLocation = Paths.get(uploadDir + File.separator + StringUtils.cleanPath(file.getOriginalFilename()));
-			Files.copy(file.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);
-
+		
+		try {		
+			
+			byte[] bytes = file.getBytes();
+			Path path = Paths.get(uploadDir + file.getOriginalFilename());
+			Files.write(path, bytes);
+			
 			Optional<PetProfile> profile = this.petProfileRepository.findById(petProfileId);
 
 			if (profile.isPresent()) {
-				Photo uploadPhoto = new Photo(profile.get(),copyLocation.toString(),title, shortDesciprion);				
+				Photo uploadPhoto = new Photo(profile.get(),"http://localhost/img/"+file.getOriginalFilename(),title, shortDesciprion);				
 				this.photoRepository.save(uploadPhoto);
 				return "Foto subida correctamente";			    
 			}else {
@@ -57,7 +57,7 @@ public class PhotoServiceImpl implements IPhotoService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new FileException("Problema al cargar el archivo: " + file.getOriginalFilename()
+			throw new FileException("Problema al cargar el archivo: " + file.getOriginalFilename() + file.getName()
 			+ ". Intentelo de nuevo.");
 		}
 

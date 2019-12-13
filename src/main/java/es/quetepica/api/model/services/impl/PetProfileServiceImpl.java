@@ -24,12 +24,13 @@ public class PetProfileServiceImpl implements IPetProfileService {
 	@Override
 	public PetProfileWrapper createPetProfile(PetProfileWrapper petProfileWrapper) {
 
+
 		Optional<PetProfile> petProfile = this.petProfileRepository.findByIdAndNick(petProfileWrapper.getId(),petProfileWrapper.getNick());
 
 		if (petProfile.isPresent()) {			
 			throw new ConflictException("Se ha encontrado un perfil de mascota con los datos facilitados.");			
 		}
-		else {
+		else {		
 			PetProfile petProfileInsert = new PetProfile(petProfileWrapper.getUser(),petProfileWrapper.getNick(),petProfileWrapper.getSexo(),petProfileWrapper.getRaza(),petProfileWrapper.getImgProfile(),petProfileWrapper.getDescription(),petProfileWrapper.getPetBornDate());
 			return new PetProfileWrapper(this.petProfileRepository.save(petProfileInsert));
 		}

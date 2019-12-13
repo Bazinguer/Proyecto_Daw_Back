@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.quetepica.api.configurations.exceptions.ConflictException;
-import es.quetepica.api.configurations.exceptions.NotFoundException;
 import es.quetepica.api.model.entities.Follow;
 import es.quetepica.api.model.entities.PetProfile;
 import es.quetepica.api.model.repositories.FollowRepository;
@@ -58,7 +57,8 @@ public class FollowServiceImpl implements IFollowService {
 			return listFollowWrapper;			
 
 		}else {
-			throw new NotFoundException("No sigue a nadie o la petición no escorrecta");
+			List<FollowWrapper> vacia = new ArrayList<FollowWrapper>();
+			return vacia;
 		}
 	}
 
@@ -71,7 +71,7 @@ public class FollowServiceImpl implements IFollowService {
 			this.followRepository.delete(follow.get());			
 			return "Se ha eliminado correctamente";
 		}else {
-			throw new NotFoundException("No se ha encontrado ningún registro con los datos facilitados.");
+			return "No existe dicho usuario.";
 		}
 
 	}
@@ -90,7 +90,8 @@ public class FollowServiceImpl implements IFollowService {
 			return listFollowedWrapper;			
 
 		}else {
-			throw new NotFoundException("No sigue a nadie o la petición no escorrecta");
+			List<FollowWrapper> vacia = new ArrayList<FollowWrapper>();
+			return vacia;
 		}
 	}
 

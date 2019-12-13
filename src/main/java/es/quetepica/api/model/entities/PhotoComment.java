@@ -38,6 +38,15 @@ public class PhotoComment {
 		this.creationDate = LocalDateTime.now();
 	}
 		
+		
+	public PhotoComment(Photo photo, PetProfile petProfile, String comment) {		
+		this();
+		this.photo = photo;
+		this.petProfile = petProfile;
+		this.comment = comment;		
+	}
+
+
 	public int getId() {
 		return id;
 	}

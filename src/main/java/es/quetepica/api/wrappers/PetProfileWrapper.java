@@ -46,7 +46,7 @@ public class PetProfileWrapper {
 		this.user = petProfile.getUser();
 		this.nick = petProfile.getNick();
 		this.sexo = petProfile.getSexo();
-		this.raza = petProfile.getSexo();
+		this.raza = petProfile.getRaza();
 		this.imgProfile = petProfile.getImgProfile();
 		this.description = petProfile.getDescription();
 		this.petBornDate = petProfile.getPetBornDate();

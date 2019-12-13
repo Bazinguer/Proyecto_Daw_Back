@@ -54,7 +54,9 @@ public class UserServiceImpl implements IUserService {
 
 		if (userEdit.isPresent()) {
 			userEdit.get().setUsername(userWrapper.getUsername());
-			userEdit.get().setPassword(userWrapper.getPassword());			
+			userEdit.get().setPassword(userWrapper.getPassword());		
+			System.out.println(userEdit.toString());
+			
 			return new UserWrapper(this.userRepository.save(userEdit.get()));
 
 		}else {

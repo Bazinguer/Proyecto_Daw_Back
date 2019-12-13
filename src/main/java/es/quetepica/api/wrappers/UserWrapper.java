@@ -12,14 +12,14 @@ import es.quetepica.api.model.entities.User;
 
 public class UserWrapper {	
 
-	private Integer id;
+	private Integer id;	
 	
 	@NotNull
 	private String username;	
-
-	@NotNull	
-	private String email;
 	
+	@NotNull
+	private String email;	
+
 	@NotNull
 	private String password;	
 

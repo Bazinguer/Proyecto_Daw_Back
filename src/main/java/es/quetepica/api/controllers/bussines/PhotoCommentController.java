@@ -25,5 +25,9 @@ public class PhotoCommentController {
 	public String deleteComment(Integer commentId) {	       
 		return this.photoCommentServiceImpl.deleteComment(commentId);			
 	}	
+	
+	public Integer insertComment(PhotoCommentWrapper photoCommentWrapper) {
+		return this.photoCommentServiceImpl.insertComment(photoCommentWrapper);
+	}
 
 }

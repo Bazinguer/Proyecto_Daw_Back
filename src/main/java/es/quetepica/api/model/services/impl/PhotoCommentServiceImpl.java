@@ -62,4 +62,13 @@ public class PhotoCommentServiceImpl implements IPhotoCommentService {
 		}
 	}
 
+	@Override
+	public Integer insertComment(PhotoCommentWrapper photoCommentWrapper) {		
+		PhotoComment photoComment = new PhotoComment(photoCommentWrapper.getPhoto(),photoCommentWrapper.getPetProfile(),photoCommentWrapper.getComment());		
+		this.photoCommentRepository.save(photoComment);
+		return photoCommentWrapper.getPhoto().getId();
+		
+	}
+
+
 }

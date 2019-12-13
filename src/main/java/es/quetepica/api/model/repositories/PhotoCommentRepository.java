@@ -10,5 +10,6 @@ import es.quetepica.api.model.entities.PhotoComment;
 
 @Repository
 public interface PhotoCommentRepository extends JpaRepository<PhotoComment,Integer>{
-	Optional<List<PhotoComment>> findAllByPhotoId(Integer photoId);
+	Optional<List<PhotoComment>> findAllByPhotoId(Integer photoId);	
+	
 }
