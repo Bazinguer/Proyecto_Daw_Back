@@ -1,5 +1,6 @@
 package es.quetepica.api.controllers.bussines;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +28,19 @@ public class PetProfileController {
 		}
 			
 		public List<PetProfileWrapper> listPetProfile(Integer userId){
-			return this.petProfileServiceImpl.listPetProfile(userId);	
-			
+			return this.petProfileServiceImpl.listPetProfile(userId);				
 		}
 		
 		public PetProfileWrapper procurePetProfile(Integer petProfileId){
-			return this.petProfileServiceImpl.procurePetProfile(petProfileId);
-			
+			return this.petProfileServiceImpl.procurePetProfile(petProfileId);			
 		}
+		
+		public List<PetProfileWrapper> listSerchProfiles(String raza, String sexo, Integer petBorndDate){
+			return this.petProfileServiceImpl.listSerchProfiles(raza,sexo,petBorndDate);			
+		}
+		
+		public PetProfileWrapper procurePetProfileByNick(String petNick){
+			return this.petProfileServiceImpl.procurePetProfileByNick(petNick);			
+		}	
+		
 }

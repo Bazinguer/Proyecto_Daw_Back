@@ -1,6 +1,7 @@
 package es.quetepica.api.model.services.impl;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -95,6 +96,43 @@ public class PetProfileServiceImpl implements IPetProfileService {
 
 		}else {
 			throw new NotFoundException("No se encuentran perfiles. Revisa la petición");
+		}
+	}
+
+	@Override
+	public List<PetProfileWrapper> listSerchProfiles(String raza, String sexo, Integer petBorndDate) {	
+		
+		  Calendar calendar = Calendar.getInstance();
+		  calendar.set(petBorndDate,0, 0);
+		  
+		 // Date date = calendar.getTime();	
+		  
+		Optional<List<PetProfile>> listSerchProfiles = this.petProfileRepository.findAllByRazaContainsAndSexoContains(raza, sexo); 
+		//Optional<List<PetProfile>> listSerchProfiles = this.petProfileRepository.findAllByRazaContainsAndSexoContainsAndPetBornDate(raza, sexo,date); //AndPetBornDate 
+		
+		if (listSerchProfiles.isPresent()) {
+			
+			List<PetProfileWrapper> listPetProfileWrapper = new ArrayList<PetProfileWrapper>();
+			
+				for(PetProfile petProfile: listSerchProfiles.get()) {
+					listPetProfileWrapper.add(new PetProfileWrapper(petProfile));
+				}
+				return listPetProfileWrapper;			
+
+		}else {
+			throw new NotFoundException("No se encuentran perfiles. Revisa la petición");
+		}
+	
+	}
+
+	@Override
+	public PetProfileWrapper procurePetProfileByNick(String petNick) {
+		Optional<PetProfile> petProfile = this.petProfileRepository.findByNick(petNick);
+		if (petProfile.isPresent()) {			
+				return new PetProfileWrapper(petProfile.get());			
+
+		}else {
+			throw new NotFoundException("No se encuentra perfil. Revisa la petición");
 		}
 	}
 

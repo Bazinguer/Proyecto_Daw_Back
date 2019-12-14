@@ -20,7 +20,9 @@ import es.quetepica.api.wrappers.PetProfileWrapper;
 public class PetProfileResource {
 	
 	public static final String PETPROFILE = "/petprofile";
-	public static final String LISTPROFILE = "/listprofile";	
+	public static final String LISTPROFILE = "/listprofile";
+	public static final String LISTSEARCH = "/listsearch";
+	public static final String NICK = "/nick";
 
 	@Autowired
 	private PetProfileController petProfileController;	
@@ -40,6 +42,11 @@ public class PetProfileResource {
 		return this.petProfileController.procurePetProfile(petProfileId);			
 	}	
 	
+	@GetMapping(value = NICK)
+	public PetProfileWrapper procurePetProfileByNick(String petNick){
+		return this.petProfileController.procurePetProfileByNick(petNick);			
+	}	
+	
 	@DeleteMapping
 	public String deletePetProfile(Integer id,String nick) {
 		return this.petProfileController.deletePetProfile(id,nick);
@@ -48,6 +55,11 @@ public class PetProfileResource {
 	@PutMapping
 	public PetProfileWrapper editDescripcion(@RequestBody PetProfileWrapper petProfileInputWrapper) {
 		return this.petProfileController.editDesciptionPetProfile(petProfileInputWrapper);
+	}
+	
+	@GetMapping(value = LISTSEARCH)	
+	public List<PetProfileWrapper> listSerchProfiles(String raza, String sexo, Integer petBorndDate){
+		return this.petProfileController.listSerchProfiles(raza,sexo,petBorndDate);			
 	}
 	
 	

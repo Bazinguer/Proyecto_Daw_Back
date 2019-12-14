@@ -11,5 +11,7 @@ public interface IPetProfileService {
 	PetProfileWrapper editDesciptionPetProfile(PetProfileWrapper petProfileWrapper);
 	List<PetProfileWrapper> listPetProfile(Integer userId);
 	PetProfileWrapper procurePetProfile(Integer petProfileId);
+	List<PetProfileWrapper> listSerchProfiles(String raza, String sexo, Integer petBorndDate);
+	PetProfileWrapper procurePetProfileByNick(String petNick);
 
 }
