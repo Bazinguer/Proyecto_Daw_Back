@@ -69,8 +69,12 @@ public class PhotoServiceImpl implements IPhotoService {
 		Optional<Photo> findPhoto = this.photoRepository.findById(photoId);
 
 		if (findPhoto.isPresent()) {	
+			
+			String s= findPhoto.get().getUrl();			
+			String n = s.substring(21,s.length());		
 
-			File imagen = new File(findPhoto.get().getUrl());
+			File imagen = new File(uploadDir+n);
+			
 			FileInputStream readImage;
 			try {
 				readImage = new FileInputStream(imagen);
